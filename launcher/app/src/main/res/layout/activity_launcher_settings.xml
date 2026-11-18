@@ -182,6 +182,11 @@
                     <TextView android:id="@+id/valueDefaultHome" style="@style/SettingsItemValue" />
                 </LinearLayout>
 
+                <LinearLayout android:id="@+id/rowHomeButton" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/home_key_name" />
+                    <TextView android:id="@+id/valueHomeButton" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
                 <LinearLayout android:id="@+id/rowTvSettings" style="@style/SettingsItem">
                     <TextView style="@style/SettingsItemTitle" android:text="@string/tv_settings" />
                     <TextView android:id="@+id/valueTvSettings" style="@style/SettingsItemValue" />

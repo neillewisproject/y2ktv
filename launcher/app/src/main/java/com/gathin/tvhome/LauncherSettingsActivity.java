@@ -1,8 +1,10 @@
 package com.gathin.tvhome;
 
+import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -13,6 +15,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -509,6 +512,13 @@ public final class LauncherSettingsActivity extends Activity {
             @Override boolean visual() { return false; }
             @Override void ok() { open(new Intent(LauncherSettingsActivity.this, HomeSettingsActivity.class)); }
         });
+        rows.add(new Row(R.id.rowHomeButton, R.id.valueHomeButton, R.string.home_key_name, HomePreview.EMPHASIS_NONE) {
+            @Override String value() { return getString(homeButtonEnabled() ? R.string.on : R.string.off); }
+            @Override String hint() { return getString(R.string.settings_hint_home_button); }
+            @Override boolean stepper() { return false; }
+            @Override boolean visual() { return false; }
+            @Override void ok() { showHomeButtonSetup(); }
+        });
         rows.add(new Row(R.id.rowTvSettings, R.id.valueTvSettings, R.string.tv_settings, HomePreview.EMPHASIS_NONE) {
             @Override String value() { return "›"; }
             @Override String hint() { return getString(R.string.settings_hint_tv); }
@@ -516,6 +526,29 @@ public final class LauncherSettingsActivity extends Activity {
             @Override boolean visual() { return false; }
             @Override void ok() { open(SystemSettings.intent(LauncherSettingsActivity.this, Settings.ACTION_SETTINGS)); }
         });
+    }
+
+    private boolean homeButtonEnabled() {
+        AccessibilityManager manager = getSystemService(AccessibilityManager.class);
+        if (manager == null || !manager.isEnabled()) return false;
+        ComponentName helper = new ComponentName(this, HomeKeyService.class);
+        for (AccessibilityServiceInfo service :
+                manager.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK)) {
+            if (helper.equals(ComponentName.unflattenFromString(service.getId()))) return true;
+        }
+        return false;
+    }
+
+    private void showHomeButtonSetup() {
+        Intent accessibility = SystemSettings.standardIntent(this, Settings.ACTION_ACCESSIBILITY_SETTINGS);
+        Intent settings = accessibility != null ? accessibility : SystemSettings.intent(this, Settings.ACTION_SETTINGS);
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.home_key_name)
+                .setMessage(getString(accessibility != null ? R.string.home_button_setup
+                        : R.string.home_button_setup_fallback, getString(R.string.home_key_name)))
+                .setPositiveButton(R.string.tv_settings, (dialog, which) -> open(settings))
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
     }
 
     private void wire(Row row) {
@@ -756,6 +789,12 @@ public final class LauncherSettingsActivity extends Activity {
         loadWallpaperOptions();
         config = Config.load(this);
         updatePreview(true);
+        refresh();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         refresh();
     }
 

@@ -137,6 +137,10 @@ tools/tv.py 'settings put secure screensaver_components com.gathin.tvhome/.Clock
 
 ## Remote keys
 
+- **Launcher settings → More → Home button** shows whether the Home button helper is enabled.
+  Press OK to open setup, then turn on **Home button** in the TV's Accessibility settings and confirm.
+  Press Back to refresh the status. This doesn't change the default Home app. Some Fire OS versions
+  don't list third-party accessibility services; those devices still need the ADB setup below.
 - An optional accessibility service keeps the remote's **Input** button working on Google TV
   (`INPUT_KEY_SERVICE=1` at install).
 - It can bring back other buttons only the stock launcher answered, such as the **YouTube** button

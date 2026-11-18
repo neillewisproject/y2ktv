@@ -16,11 +16,8 @@ final class SystemSettings {
 
     static Intent intent(Context context, String action) {
         PackageManager pm = context.getPackageManager();
-        Intent standard = new Intent(action);
-        ResolveInfo resolved = pm.resolveActivity(standard, PackageManager.MATCH_DEFAULT_ONLY);
-        // Fire OS resolves the standard actions to a CTS compliance stub that opens nothing;
-        // treat it as missing so the vendor fallback runs.
-        if (resolved != null && !resolved.activityInfo.name.contains("CTSDummy")) return standard;
+        Intent standard = standardIntent(context, action);
+        if (standard != null) return standard;
         Intent vendor = vendorIntent(context);
         if (vendor != null) return vendor;
         // Some firmware ships the AOSP TV settings app with no filter for the standard actions (HY300 Pro+
@@ -31,8 +28,15 @@ final class SystemSettings {
             pm.getPackageInfo(AOSP_TV_SETTINGS.getPackageName(), 0);
             return aosp;
         } catch (PackageManager.NameNotFoundException e) {
-            return standard;
+            return new Intent(action);
         }
+    }
+
+    static Intent standardIntent(Context context, String action) {
+        Intent intent = new Intent(action);
+        ResolveInfo resolved = context.getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        // Fire OS can resolve standard settings actions to a compliance stub that opens nothing.
+        return resolved != null && !resolved.activityInfo.name.contains("CTSDummy") ? intent : null;
     }
 
     private static final ComponentName AOSP_TV_SETTINGS =

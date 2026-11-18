@@ -32,6 +32,9 @@
             <action android:name="android.settings.SETTINGS" />
         </intent>
         <intent>
+            <action android:name="android.settings.ACCESSIBILITY_SETTINGS" />
+        </intent>
+        <intent>
             <action android:name="android.settings.WIFI_SETTINGS" />
         </intent>
         <intent>
