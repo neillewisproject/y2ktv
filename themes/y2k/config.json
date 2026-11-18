@@ -1,0 +1,15 @@
+{
+  "background_color": "#12001F",
+  "wallpaper": true,
+  "wallpaper_rotation_minutes": 20,
+  "wallpaper_order": "shuffle",
+  "wallpaper_dim": 20,
+  "dock_glass": true,
+  "glass_style": "halo",
+  "ambient_glow": false,
+  "app_glow": false,
+  "icon_only_buttons": true,
+  "header_white": true,
+  "clock_wallpaper": true,
+  "clock_wallpaper_dim": 35
+}

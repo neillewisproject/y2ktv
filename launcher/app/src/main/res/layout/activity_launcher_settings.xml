@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Launcher settings: the rows on the left, a live miniature of Home on the right that redraws as each choice
+     changes. Left and Right step a row's value; OK steps it too, or opens the row's own screen. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/settingsRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/settings_bg"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="42"
+        android:orientation="vertical"
+        android:paddingStart="48dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="34dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/launcher_settings"
+            android:textColor="#FFFFFFFF"
+            android:textSize="28sp"
+            android:fontFamily="@string/font_medium" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/settings_subtitle"
+            android:textColor="#FF8994A3"
+            android:textSize="13sp" />
+
+        <ScrollView
+            android:id="@+id/settingsScroll"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="6dp"
+            android:clipToPadding="false"
+            android:paddingBottom="36dp"
+            android:requiresFadingEdge="vertical"
+            android:fadingEdgeLength="36dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView style="@style/SettingsSection" android:text="@string/settings_section_look" />
+
+                <LinearLayout android:id="@+id/rowTheme" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/theme_label" />
+                    <TextView android:id="@+id/valueTheme" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowWallpaper" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/wallpaper_label" />
+                    <TextView android:id="@+id/valueWallpaper" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowWallpaperDim" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/wallpaper_dim_label" />
+                    <TextView android:id="@+id/valueWallpaperDim" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowRotation" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/rotation_label" />
+                    <TextView android:id="@+id/valueRotation" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowAccent" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/accent_label" />
+                    <TextView android:id="@+id/valueAccent" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowDock" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/dock_opacity_label" />
+                    <TextView android:id="@+id/valueDock" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <TextView style="@style/SettingsSection" android:text="@string/settings_section_layout" />
+
+                <LinearLayout android:id="@+id/rowColumns" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/columns_label" />
+                    <TextView android:id="@+id/valueColumns" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowRows" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/rows_below_dock_label" />
+                    <TextView android:id="@+id/valueRows" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <TextView style="@style/SettingsSection" android:text="@string/settings_section_clock" />
+
+                <LinearLayout android:id="@+id/rowClock" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/dream_name" />
+                    <TextView android:id="@+id/valueClock" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowClockStyle" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/clock_style_label" />
+                    <TextView android:id="@+id/valueClockStyle" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowWeather" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/weather_label" />
+                    <TextView android:id="@+id/valueWeather" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowUnits" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/weather_units_label" />
+                    <TextView android:id="@+id/valueUnits" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowClockWeather" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/clock_weather_label" />
+                    <TextView android:id="@+id/valueClockWeather" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <TextView style="@style/SettingsSection" android:text="@string/settings_section_schedule" />
+
+                <LinearLayout android:id="@+id/rowSchedule" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/schedule_label" />
+                    <TextView android:id="@+id/valueSchedule" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowDayTheme" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/day_theme_label" />
+                    <TextView android:id="@+id/valueDayTheme" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowDayStarts" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/day_starts_label" />
+                    <TextView android:id="@+id/valueDayStarts" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowNightTheme" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/night_theme_label" />
+                    <TextView android:id="@+id/valueNightTheme" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowNightStarts" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/night_starts_label" />
+                    <TextView android:id="@+id/valueNightStarts" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <TextView style="@style/SettingsSection" android:text="@string/settings_section_motion" />
+
+                <LinearLayout android:id="@+id/rowAnimations" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/animations_label" />
+                    <TextView android:id="@+id/valueAnimations" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowAdvanced" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/advanced_effects" />
+                    <TextView android:id="@+id/valueAdvanced" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <TextView style="@style/SettingsSection" android:text="@string/settings_section_more" />
+
+                <LinearLayout android:id="@+id/rowReorder" style="@style/SettingsItem" android:visibility="gone">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/reorder" />
+                    <TextView android:id="@+id/valueReorder" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowOpenOnStart" style="@style/SettingsItem" android:visibility="gone">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/open_on_start_label" />
+                    <TextView android:id="@+id/valueOpenOnStart" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowFollowTheme" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/follow_theme" />
+                    <TextView android:id="@+id/valueFollowTheme" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowDefaultHome" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/home_settings" />
+                    <TextView android:id="@+id/valueDefaultHome" style="@style/SettingsItemValue" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rowTvSettings" style="@style/SettingsItem">
+                    <TextView style="@style/SettingsItemTitle" android:text="@string/tv_settings" />
+                    <TextView android:id="@+id/valueTvSettings" style="@style/SettingsItemValue" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="58"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="48dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="@string/settings_preview"
+            android:textAllCaps="true"
+            android:textColor="#FF7F8A99"
+            android:textSize="12sp"
+            android:letterSpacing="0.14"
+            android:fontFamily="@string/font_medium" />
+
+        <com.gathin.tvhome.HomePreview
+            android:id="@+id/preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:elevation="12dp" />
+
+        <TextView
+            android:id="@+id/previewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="2dp"
+            android:textColor="#FFFFFFFF"
+            android:textSize="20sp"
+            android:fontFamily="@string/font_medium" />
+
+        <TextView
+            android:id="@+id/previewHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="2dp"
+            android:minLines="3"
+            android:lineSpacingExtra="3dp"
+            android:textColor="#FFA3ADBA"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>
